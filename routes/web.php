@@ -67,13 +67,6 @@ Route::get('/categories/{category}/getProducts', [CategoryController::class, 'ge
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 
-    // Route::redirect('/', '/admin/products');
-
-    /*
-    Route::get('/', function () {
-        return redirect(route('adminProducts'));
-    });
-     */
 
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::get('/enterAsUser/{userId}', [AdminController::class, 'enterAsUser'])->name('enterAsUser');
@@ -83,3 +76,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
         return 'Админка: продукты';
     })->name('adminProducts');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
