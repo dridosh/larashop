@@ -13,6 +13,7 @@ class AdminController extends Controller
 {
     public function index ()
     {
+      //  dd(__METHOD__);
         $users = User::get();
         return view('admin.home', compact('users'));
     }
