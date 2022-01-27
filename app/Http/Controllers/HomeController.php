@@ -42,6 +42,7 @@ class HomeController extends Controller
             'title' => 'Список категорий',
             'showTitle' => true
         ];
+
         return view('home', $data);
     }
 

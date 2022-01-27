@@ -17,6 +17,7 @@ class CheckIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+
         $user = Auth::user();
         if ($user->roles->pluck('name')->contains('Admin')) {
             return $next($request);
