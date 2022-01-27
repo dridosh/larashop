@@ -4,7 +4,9 @@
             <div v-for="category in categories" :key="category.id" class="col-3">
                 <a :href="'categories/' + category.id">
                     <div class="card mb-4" style="width: 18rem;">
-                        <img :src="`/storage/img/categories/` + category.picture" class="card-img-top" alt="">
+
+<!--                       <img :src="'nopicture.png'" class="card-img-top" alt="Нет фото">-->
+                        <img :src="`/storage/img/categories/` + category.picture" class="card-img-top" alt="Нет фото">
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{category.name}}
@@ -25,3 +27,4 @@
         props: ['categories', 'source']
     }
 </script>
+
