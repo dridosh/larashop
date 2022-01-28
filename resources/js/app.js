@@ -23,6 +23,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 Vue.component('category-component', require('./components/CategoryComponent.vue').default);
 Vue.component('basket-component', require('./components/BasketComponent.vue').default);
+Vue.component('navbar-basket-component', require('./components/NavBarBasketComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,6 +31,9 @@ Vue.component('basket-component', require('./components/BasketComponent.vue').de
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//import store from './store/store'
+
 const app = new Vue({
     el: '#app',
+    store
 });

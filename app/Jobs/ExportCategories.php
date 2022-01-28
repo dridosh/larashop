@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\CategoriesExportFinishEvent;
 use App\Models\Category;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,14 +16,16 @@ class ExportCategories implements ShouldQueue
 
     public $tries = 2;
 
+    public $exportColumns;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($exportColumns = true)
     {
-        //
+        $this->exportColumns = $exportColumns;
     }
 
     /**
@@ -32,18 +35,21 @@ class ExportCategories implements ShouldQueue
      */
     public function handle()
     {
-        $c = 10 / 0;
         $categories = Category::get()->toArray();
         $file = fopen('exportCategories.csv', 'w');
-        $columns = [
-            'id',
-            'name',
-            'description',
-            'picture',
-            'created_at',
-            'updated_at'
-        ];
-        fputcsv($file, $columns, ';');
+
+        if ($this->exportColumns) {
+            $columns = [
+                'id',
+                'name',
+                'description',
+                'picture',
+                'created_at',
+                'updated_at'
+            ];
+            fputcsv($file, $columns, ';');
+        }
+
         foreach ($categories as $category) {
             $category['name'] = iconv('utf-8', 'windows-1251//IGNORE', $category['name']);
             $category['description'] = iconv('utf-8', 'windows-1251//IGNORE', $category['description']);
@@ -51,5 +57,8 @@ class ExportCategories implements ShouldQueue
             fputcsv($file, $category, ';');
         }
         fclose($file);
+
+        event(new CategoriesExportFinishEvent('test'));
+        CategoriesExportFinishEvent::dispatch('test');
     }
 }

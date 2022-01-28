@@ -8,7 +8,6 @@ class CategoryController extends Controller
 {
     public function category (Category $category)
     {
-
         return view('category', compact('category'));
     }
 

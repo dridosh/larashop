@@ -21,7 +21,7 @@
         Нет заголовка
     @endif
 
-    <home-component source="blade_template" :categories="{{$categories}}" ></home-component>
+    <home-component source="blade_templade" :categories="{{$categories}}" ></home-component>
 
 </div>
 @endsection

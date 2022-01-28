@@ -22,7 +22,8 @@ class AdminController extends Controller
 
     public function exportCategories ()
     {
-        ExportCategories::dispatch();
+        $exportColumns = false;
+        ExportCategories::dispatch($exportColumns);
         session()->flash('startExportCategories');
         return back();
     }

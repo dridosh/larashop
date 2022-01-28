@@ -36,6 +36,7 @@ Route::prefix('home')->group(function () {
 
 Route::prefix('basket')->group(function () {
     Route::get('/', [BasketController::class, 'index'])->name('basket');
+    Route::get('/getProductsQuantity', [BasketController::class, 'getProductsQuantity']);
     Route::post('/createOrder', [BasketController::class, 'createOrder'])->name('createOrder');
     Route::prefix('product')->group(function () {
         Route::post('/add', [BasketController::class, 'add'])->name('addProduct');
@@ -67,7 +68,7 @@ Route::get('/categories/{category}/getProducts', [CategoryController::class, 'ge
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
 
-    Route::redirect('/', '/admin/products');
+    // Route::redirect('/', '/admin/products');
 
     /*
     Route::get('/', function () {

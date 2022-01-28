@@ -1,0 +1,6 @@
+
+
+Create link to storage/app/public in public_folder:
+php artisan storage:link
+
+

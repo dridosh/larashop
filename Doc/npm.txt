@@ -6,3 +6,5 @@ npm update vue-loader
 php artisan ui vue --auth
 npm fund
 npm i --save vue@next vue@-loader@next
+
+npm run watch

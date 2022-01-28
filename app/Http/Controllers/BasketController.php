@@ -55,7 +55,8 @@ class BasketController extends Controller
         session()->put('products', $products);
         session()->save();
         return [
-            'quantity' => $products[$id]
+            'quantity' => $products[$id],
+            'basketProductsQuantity' => collect($products)->sum()
         ];
     }
 
@@ -77,12 +78,14 @@ class BasketController extends Controller
         session()->put('products', $products);
         session()->save();
         return [
-            'quantity' => $products[$id] ?? 0
+            'quantity' => $products[$id] ?? 0,
+            'basketProductsQuantity' => collect($products)->sum()
         ];
     }
 
     public function createOrder (Request $request)
     {
+
         $user = Auth::user();
         $uniqueRule = $user ? "unique:users,email,{$user->id}" : 'unique:users';
 
@@ -144,6 +147,12 @@ class BasketController extends Controller
 
         session()->forget('products');
         return back();
+    }
+
+    public function getProductsQuantity ()
+    {
+        $products = session('products', []);
+        return collect($products)->sum();
     }
 
     protected function generatePassword ($type, $lenght)

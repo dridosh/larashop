@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-if="errors.length" class="alert alert-danger">
+        <div v-if="errors" class="alert alert-danger">
             <ul>
                 <li v-for="(error, idx) in errors" :key="idx">
-                    {{ error }}
+                    {{ error[0] }}
                 </li>
                 <template v-if="errors.email">
                     Ссылка на <a :href="routeLogin">вход</a>
@@ -46,15 +46,25 @@
 
         <template v-if="products.length">
             <label>Имя</label>
-            <input v-model="name" class="form-control mb-2">
+            <input v-model="name" :disabled="isDisabled" class="form-control mb-2">
 
             <label>Адресс</label>
-            <input class="form-control mb-2">
+            <input v-model="mainAddress" :disabled="isDisabled" class="form-control mb-2">
 
             <label>Почта</label>
-            <input v-model="email" type='email' class="form-control mb-2">
+            <input v-model="email" :disabled="isDisabled" type='email' class="form-control mb-2">
 
-            <button class="btn btn-success">Оформить заказ</button>
+            <button
+                @click="submit"
+                :disabled="processing"
+                class="btn btn-success submit-button"
+            >
+                <div v-if="processing" class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <span v-else>Оформить заказ</span>
+                
+            </button>
         </template>
 
     </div>
@@ -62,12 +72,21 @@
 
 <script>
     export default {
-        props: ['errorList', 'routeLogin', 'routeHome', 'products'],
+        props: [
+            'errorList',
+            'routeLogin',
+            'routeHome',
+            'routeOrders',
+            'products',
+            'name',
+            'email',
+            'mainAddress'
+            ],
         data () {
             return {
-                errors: [],
-                name: '',
-                email: ''
+                processing: false,
+                errors: null,
+                isDisabled: true
             }
         },
         computed: {
@@ -77,9 +96,39 @@
                 }, 0)
             }
         },
+        methods: {
+            submit () {
+                this.processing = true
+                this.errors = null
+                const params = {
+                    name: this.name,
+                    email: this.email,
+                    address: this.mainAddress
+                }
+                axios.post('/basket/createOrder', params)
+                    .then(() => {
+                        this.$swal({
+                            title: 'Заказ успешно создан!',
+                            icon: 'success',
+                            confirmButtonText: 'Супер!'
+                        }).then(() => {
+                            window.location.href = this.routeOrders
+                        })
+                    })
+                    .catch((error) => {
+                        this.errors = error.response.data.errors
+                    })
+                    .finally(() => {
+                        this.processing = false
+                    })
+            }
+        },
         mounted () {
             for (let error in this.errorList) {
                 this.errors.push(this.errorList[error][0])
+            }
+            if (!this.email) {
+                this.isDisabled = false
             }
         }
         
@@ -89,5 +138,13 @@
 <style scoped>
     .itogo {
         text-align: right;
+    }
+    .submit-button {
+        min-width: 137px;
+        height: 37px;
+    }
+    .spinner-border {
+        height: 24px;
+        width: 24px
     }
 </style>

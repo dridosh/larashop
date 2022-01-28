@@ -23,14 +23,5 @@ class ProductFactory extends Factory
             'category_id' => Category::get()->random()->id,
             'picture' => 'nopicture.png'
         ];
-//       return [
-//            'name' =>'name',
-//            'description' => 'des',
-//            'price' =>1,
-//            'category_id' => 1,
-//            'picture' => ''
-//        ];
-
-
     }
 }
