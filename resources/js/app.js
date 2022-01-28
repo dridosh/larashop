@@ -31,7 +31,7 @@ Vue.component('navbar-basket-component', require('./components/NavBarBasketCompo
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//import store from './store/store'
+import store from './store/store'
 
 const app = new Vue({
     el: '#app',
