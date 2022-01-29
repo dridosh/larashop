@@ -26,7 +26,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-black bg-opacity-10 shadow-none">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Панель администратора {{ config('app.name', 'Laravel') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -36,54 +36,46 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav ms-auto">
 
-
-                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Категории</a>
+                            </li>
+                           <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Товары</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Заказы</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Пользователи</a>
+                            </li>
 
                         </ul>
+
+
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
 
-
                             <navbar-basket-component route-Basket="{{route('basket')}}"></navbar-basket-component>
-                            <!-- Authentication Links -->
-                            @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
 
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }}
-                                        {{--   <img--}}
-                                        {{--   alt=  "{{ Auth::user()->name }}"--}}
-                                        {{--   style="height:50px;margin-bottom: 1px;border-radius: 100px;border: 1px solid grey;"--}}
-                                        {{--   src="{{asset('storage/img/users/')}}/{{Auth::user()->picture}}"--}}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <span class="dropdown-login">
-
-                                   @admin  {{-- AppServiceProvider ->  boot -> Blade::if('admin', function ( --}}
-                                            <a class="dropdown-item"
-                                               href="{{ route('admin') }}">Панель администратора</a>
-                                   @endadmin
-
-                                   <a class="dropdown-item" href="{{ route('profile') }}">Личный кабинет</a>
+{{--                                      <strong>  {{ Auth::user()->name }}</strong>--}}
+                                        {{--                                    </span>--}}
+                                    <a class="dropdown-item" href="{{ route('home') }}">Магазин</a>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">Личный кабинет</a>
                                     <a class="dropdown-item" href="{{ route('orders') }}">Заказы</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                         Выход
                                     </a>
 
@@ -92,7 +84,6 @@
                                     </form>
                                     </div>
                                 </li>
-                            @endguest
                         </ul>
                     </div>
                 </div>

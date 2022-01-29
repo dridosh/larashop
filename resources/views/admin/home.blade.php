@@ -1,7 +1,7 @@
-@extends('../layouts.app')
+@extends('../admin.adminLayouts.adminApp')
 
 @section('title')
-    Админка
+    Админкаaaa
 @endsection
 
 @section('content')
