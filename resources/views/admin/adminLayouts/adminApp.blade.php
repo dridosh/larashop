@@ -39,26 +39,19 @@
                         <ul class="navbar-nav ms-auto">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Категории</a>
+                                <a class="nav-link" href="{{ route('adminCategories') }}">Категории</a>
                             </li>
                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Товары</a>
+                                <a class="nav-link" href="{{ route('adminProducts') }}">Товары</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Заказы</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Пользователи</a>
+                                <a class="nav-link" href="{{ route('adminUsers') }}">Пользователи</a>
                             </li>
 
                         </ul>
 
-
-
-                        <!-- Right Side Of Navbar -->
+                       <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
-
-                            <navbar-basket-component route-Basket="{{route('basket')}}"></navbar-basket-component>
 
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -72,7 +65,6 @@
                                         {{--                                    </span>--}}
                                     <a class="dropdown-item" href="{{ route('home') }}">Магазин</a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">Личный кабинет</a>
-                                    <a class="dropdown-item" href="{{ route('orders') }}">Заказы</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

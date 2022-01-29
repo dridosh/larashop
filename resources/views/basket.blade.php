@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        <h2 class="text-center m-5">Корзина</h2>
 
         <basket-component
             :products="{{$products}}"

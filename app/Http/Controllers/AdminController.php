@@ -10,8 +10,19 @@ class AdminController extends Controller
 {
     public function index ()
     {
-        $users = User::get();
-        return view('admin.home', compact('users'));
+        return view('admin.home');
+    }
+
+    public function adminProducts (){
+         return view('admin.adminProducts');
+    }
+     public function adminCategories (){
+         return view('admin.adminCategories');
+    }
+     public function adminUsers (){
+         $users = User::get();
+         return view('admin.adminUsers', compact('users'));
+
     }
 
     public function enterAsUser ($userId)

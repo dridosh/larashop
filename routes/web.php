@@ -44,43 +44,36 @@ Route::prefix('basket')->group(function () {
     });
 });
 
+
+
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
-
-// Route::any('/{any}', function () {
-//     return redirect(route('main'));
-// })->where('any', '.*');
-
 Auth::routes();
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
 
 Route::get('/categories/{category}', [CategoryController::class, 'category'])->name('category');
 Route::get('/categories/{category}/getProducts', [CategoryController::class, 'getProducts']);
 
+
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
-
-    // Route::redirect('/', '/admin/products');
-
-    /*
-    Route::get('/', function () {
-        return redirect(route('adminProducts'));
-    });
-     */
-
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-    Route::get('/enterAsUser/{userId}', [AdminController::class, 'enterAsUser'])->name('enterAsUser');
+    Route::get('/products', [AdminController::class, 'adminProducts'])->name('adminProducts');
+    Route::get('/categories', [AdminController::class, 'adminCategories'])->name('adminCategories');
     Route::post('/exportCategories', [AdminController::class, 'exportCategories'])->name('exportCategories');
+    Route::get('/users', [AdminController::class, 'adminUsers'])->name('adminUsers');
+    Route::get('/enterAsUser/{userId}', [AdminController::class, 'enterAsUser'])->name('enterAsUser');
 
-    Route::get('/products', function () {
-        return 'Админка: продукты';
-    })->name('adminProducts');
 });
+
+

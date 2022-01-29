@@ -7,16 +7,9 @@
 @section('content')
 
 <div class="container">
-    @auth
-        Вы это читаете, потому что вы авторизованы
-    @endauth
 
-    @guest
-        Пожалуйста, авторизуйтесь
-    @endguest
-
-    @if ($showTitle)
-        <h1>{{$title}}</h1>
+     @if ($showTitle)
+        <h1 class="text-center m-5">{{$title}}</h1>
     @else
         Нет заголовка
     @endif

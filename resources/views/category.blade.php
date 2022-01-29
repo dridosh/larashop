@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3> ID категории: {{ $category->id }} </h3>
-        <h3> Название категории: {{ $category->name }} </h3>
-
+        <h2 class="text-center m-5">{{ $category->name }}</h2>
         <div class="row">
             <category-component :category-id="{{$category->id}}"></category-component>
         </div>
