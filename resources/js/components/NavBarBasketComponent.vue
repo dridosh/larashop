@@ -1,6 +1,6 @@
 <template>
     <li class="nav-item">
-        <a class="nav-link" href="/">
+        <a class="nav-link" :href="routeBasket">
             Корзина {{ quantity }}
         </a>
     </li>
@@ -8,6 +8,7 @@
 
 <script>
     export default {
+        props: ['routeBasket'],
         computed: {
             quantity () {
                 const qn = this.$store.state.basketProductsQuantity
@@ -16,6 +17,7 @@
         },
         mounted () {
             this.$store.dispatch('getBasketProductsQuantity', {})
+
         }
     }
 </script>
