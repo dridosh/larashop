@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BasketController;
+    use App\Http\Controllers\AdminProductController;
+    use App\Http\Controllers\BasketController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -69,12 +70,13 @@ Route::get('/categories/{category}/getProducts', [CategoryController::class, 'ge
 
 Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-    Route::get('/products', [AdminController::class, 'adminProducts'])->name('adminProducts');
+//    Route::get('/products', [AdminController::class, 'adminProducts'])->name('adminProducts');
     Route::post('/exportCategories', [AdminController::class, 'exportCategories'])->name('exportCategories');
     Route::get('/users', [AdminController::class, 'adminUsers'])->name('adminUsers');
     Route::get('/enterAsUser/{userId}', [AdminController::class, 'enterAsUser'])->name('enterAsUser');
 
     Route::resource('adminCategories', AdminCategoryController::class);
+    Route::resource('adminProduct', AdminProductController::class);
 
 });
 

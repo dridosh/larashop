@@ -17,32 +17,28 @@
                         Изображение
                     </th>
                     <th>
-                        Название
+                        Наименование
                     </th>
-                    <th>
-                        Описание
-                    </th>
-                    <th>
-                        Цена
+                     <th>
+                        Цена, руб
                     </th>
                     <th>
                         Действия
                     </th>
                 </tr>
-                @foreach($categories as $category)
+                @foreach($products as $product)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td> <img src="{{asset('storage/img/categories/')}}/{{$category->picture}}"
+                        <td>{{ $product->id }}</td>
+                        <td> <img src="{{asset('storage/img/products/')}}/{{$product->picture}}"
                                   height="40px"> </td>
 
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->description}}</td>
-                        <td>{{ $category->description}}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->price}}</td>
                         <td>
-                            <div class="btn-group" role="group">
-                                <form action="{{route('adminCategories.destroy', $category)}}" method="POST">
-                                    <a class="btn btn-success" type="button" href="{{route('adminCategories.show', $category)}}">Открыть</a>
-                                    <a class="btn btn-warning" type="button" href="{{route('adminCategories.edit', $category)}}">Редактировать</a>
+                            <div class="btn-group" role="group"  >
+                                <form action="{{route('adminProduct.destroy', $product)}}" method="POST">
+                                    <a class="btn btn-success" type="button" href="{{route('adminProduct.show', $product)}}">Открыть</a>
+                                    <a class="btn btn-warning" type="button" href="{{route('adminProduct.edit', $product)}}">Редактировать</a>
                                     @csrf
                                     @method('DELETE')
                                     <input class="btn btn-danger" type="submit" value="Удалить"></form>
@@ -52,8 +48,9 @@
                 @endforeach
             </tbody>
         </table>
+        {{$products->links("pagination::bootstrap-4")}}
 
         <a class="btn btn-success" type="button"
-           href="{{route ('adminCategories.create')}}">Добавить категорию</a>
+           href="{{route ('adminProduct.create')}}">Добавить товар</a>
     </div>
 @endsection

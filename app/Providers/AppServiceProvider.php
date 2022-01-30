@@ -6,6 +6,7 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Blade;
     use Illuminate\Support\ServiceProvider;
+    use Nette\Utils\Paginator;
 
     class AppServiceProvider extends ServiceProvider {
         /**

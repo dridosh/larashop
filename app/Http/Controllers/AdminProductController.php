@@ -2,17 +2,20 @@
 
     namespace App\Http\Controllers;
 
+
     use App\Models\Category;
+    use App\Models\Product;
     use Illuminate\Http\Request;
 
-    class AdminCategoryController extends Controller {
+    class AdminProductController extends Controller {
         /**
          * Display a listing of the resource.
          *
+         *
          */
         public function index () {
-            $categories = Category::all();
-            return view('admin.adminCategories', compact('categories'));
+            $products = Product::paginate(5);
+            return view('admin.adminProducts', compact('products'));
         }
 
         /**
@@ -21,12 +24,15 @@
          *
          */
         public function create () {
-            return view('admin.adminCategoryEdit');
+            $categories = Category::all();
+            return view('admin.adminProductEdit', compact('categories'));
         }
 
         /**
          * Store a newly created resource in storage.
          *
+         * @param \Illuminate\Http\Request $request
+
          */
         public function store (Request $request) {
             $input = $request->all();
@@ -36,13 +42,14 @@
             if ($file) {
                 $ext = $file->getClientOriginalExtension();
                 $fileName = time() . rand(1000, 9999) . '.' . $ext;
-                $file->storeAs('public/img/categories/', $fileName);
+                $file->storeAs('public/img/products/', $fileName);
 
                 $input['picture'] = $fileName;
             }
 
-            Category::create($input);
-            return redirect(route('adminCategories.index'));
+            Product::create($input);
+            return redirect(route('adminProduct.index'));
+
 
         }
 
@@ -53,19 +60,22 @@
          *
          */
         public function show ($id) {
-            $category = Category::find($id);
-            return view('admin.adminCategoryShow', compact('category'));
+            $product = Product::find($id);
+//            $category=$product->category();
+//            dd($category);
+            return view('admin.adminProductShow', compact('product'));
         }
 
         /**
          * Show the form for editing the specified resource.
          *
          * @param int $id
-         *
+
          */
         public function edit ($id) {
-            $category = Category::find($id);
-            return view('admin.adminCategoryEdit', compact('category'));
+            $product = Product::find($id);
+            $categories = Category::all();
+            return view('admin.adminProductEdit', compact('product','categories'));
         }
 
         /**
@@ -73,10 +83,11 @@
          *
          * @param \Illuminate\Http\Request $request
          * @param int $id
-         * @return \Illuminate\Http\RedirectResponse
+
          */
         public function update (Request $request, $id) {
-            $category = Category::find($id);
+
+            $product = Product::find($id);
             $input = $request->all();
             $file = $request->file('picture');
 
@@ -84,31 +95,31 @@
             if ($file) {
                 $ext = $file->getClientOriginalExtension();
                 $fileName = time() . rand(1000, 9999) . '.' . $ext;
-                $file->storeAs('public/img/categories/', $fileName);
+                $file->storeAs('public/img/products/', $fileName);
 
-                $category->picture = $fileName;
+                $product->picture = $fileName;
             }
 
 
-            $category->name = $input['name'];
-            $category->description = $input['description'];
-            $category->save();
+            $product->name = $input['name'];
+            $product->description = $input['description'];
+            $product->save();
 
 
-            session()->flash('categoryUpdated');
-            return redirect(route('adminCategories.index'));
-
-
+            session()->flash('productUpdated');
+            return redirect(route('adminProduct.index'));
         }
 
         /**
          * Remove the specified resource from storage.
          *
          * @param int $id
+
          */
         public function destroy ($id) {
-            $category = Category::find($id);
-            $category->delete();
-            return redirect()->route('adminCategories.index');
+            $product = Product::find($id);
+            $product->delete();
+            return redirect()->route('adminProduct.index');
+            //
         }
     }
