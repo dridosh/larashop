@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ExportCategories;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,8 @@ class AdminController extends Controller
          return view('admin.adminProducts');
     }
      public function adminCategories (){
-         return view('admin.adminCategories');
+//        $categories=Category::all();
+//         return view('admin.adminCategories', compact('categories'));
     }
      public function adminUsers (){
          $users = User::get();
