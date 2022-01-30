@@ -40,6 +40,8 @@
                 </tr>
             </tbody>
         </table>
+        <a class="btn btn-success" type="button" href="{{route('adminCategories.index')}}"> Назад </a>
+
     </div>
 
 @endsection

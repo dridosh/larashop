@@ -1,0 +1,101 @@
+https://tokmakov.msk.ru/blog/item/586
+
+Создадим миграцию для добавления поля deleted_at:
+
+> php artisan make:migration alter_posts_table --table=posts
+
+ase\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AlterPostsTable extends Migration {
+
+    public function up() {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->softDeletes();
+        });
+    }
+
+    public function down() {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+    }
+}
+
+> php artisan migrate
+
+
+
+
+Теперь добавляем в модель Post трейт SoftDeletes:
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Post extends Model {
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+
+
+Теперь при вызове метода delete, поле deleted_at будет установлено в значение текущей даты и времени. При запросе моделей, использующих мягкое удаление, «удалённые» модели не будут включены в результат запроса.
+
+Для определения того, удалён ли на самом деле экземпляр модели, предназначен метод trashed():
+
+if ($post->trashed()) {
+    // пост не был удален, а был помещен в корзину
+}
+
+Для получения всех моделей, в том числе удалённых, предназначен метод withTrashed():
+
+$posts = App\Post::withTrashed()
+    ->where('user_id', auth()->user()->id)
+    ->get();
+
+
+Метод withTrashed() может быть использован в отношениях:
+
+$post->comments()->withTrashed()->get();
+
+
+Для получения только псевдоудалённых моделей предназначен метод onlyTrashed():
+
+$flights = App\Post::onlyTrashed()
+    ->where('user_id', auth()->user()->id)
+    ->get();
+
+
+
+Для восстановления псевдоудалённой модели предназначен метод restore():
+
+$post->restore();
+
+
+Этот метод можно использовать для восстановления нескольких моделей. Подобно другим массовым операциям, это не вызовет никаких событий для восстанавливаемых моделей.
+
+App\Post::onlyTrashed()
+    ->where('user_id', auth()->user()->id)
+    ->restore();
+
+
+
+Как и метод withTrashed(), метод restore можно использовать в отношениях:
+
+$post->comments()->onlyTrashed()->restore();
+
+
+
+Метод forceDelete() позволяет удалить псевдоуделенную модель уже по настоящему:
+
+
+
+
+// Принудительное удаление одного экземпляра модели...
+$post->forceDelete();
+// Принудительное удаление всех связанных моделей...
+$post->comments()->forceDelete();

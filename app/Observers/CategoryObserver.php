@@ -30,8 +30,8 @@ class CategoryObserver
      */
     public function updated(Category $category)
     {
-        dump($category->getOriginal('description'));
-        dd($category->getDirty());
+//        dump($category->getOriginal('description'));
+//        dd($category->getDirty());
     }
 
     /**

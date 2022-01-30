@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         $data = [
             'categories' => $categories,
-            'title' => 'Список категорий',
+            'title' => 'Категории',
             'showTitle' => true
         ];
         return view('home', $data);

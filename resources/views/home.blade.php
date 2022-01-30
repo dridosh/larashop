@@ -9,7 +9,7 @@
 <div class="container">
 
      @if ($showTitle)
-        <h1 class="text-center m-5">{{$title}}</h1>
+        <h1 class="text-center mb-5">{{$title}}</h1>
     @else
         Нет заголовка
     @endif

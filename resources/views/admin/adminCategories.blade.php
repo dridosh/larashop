@@ -14,6 +14,9 @@
                         #
                     </th>
                     <th>
+                        Изображение
+                    </th>
+                     <th>
                         Название
                     </th>
                     <th>
@@ -26,6 +29,9 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
+                        <td> <img src="{{asset('storage/img/categories/')}}/{{$category->picture}}"
+                                  height="40px"> </td>
+
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description}}</td>
                         <td>
