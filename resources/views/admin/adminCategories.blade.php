@@ -5,8 +5,24 @@
 @endsection
 
 @section('content')
+
+    @if (session('startExportCategories'))
+        <div class="alert alert-success">
+            Выгрузка категорий запущена
+        </div>
+    @endif
+
+
     <div class="container">
-        <h3 class="text-center m-5">Категории</h3>
+        <form method="post" action="{{ route('exportCategories') }}">
+            @csrf
+            <button type="submit" class="btn btn-link
+">Выгрузить категории</button>
+        </form>
+
+        <h3 class="text-center mb-5">Категории</h3>
+
+
         <table class="table">
             <tbody>
                 <tr>
@@ -51,6 +67,9 @@
 
         <a class="btn btn-success" type="button"
            href="{{route ('adminCategories.create')}}">Добавить категорию</a>
+
+
+
     </div>
 
 @endsection

@@ -5,7 +5,7 @@
                 <img style="width: 50px; height: 25px;" src='/storage/img/loaders/loader.gif'>
             </template>
             <div v-else v-for="product in products" :key="product.id" class="col-3 mb-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card" >
                     <img :src="'/storage/img/products/' + product.picture" class="card-img-top" :alt="product.name">
                     <div class="card-body">
                         <h5 class="card-title">
@@ -99,7 +99,7 @@
     }
 
     .card:hover {
-        box-shadow: 0.4em 0.4em 5px rgb(122 122 122 / 50%);
+        box-shadow: 0.4em 0.4em 5px rgb(122 122 122);
     }
 
     .card-basket-buttons {

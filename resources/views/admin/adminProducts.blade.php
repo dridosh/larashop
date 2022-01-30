@@ -5,7 +5,23 @@
 @endsection
 
 @section('content')
+    @if (session('startExportProducts'))
+        <div class="alert alert-success">
+            Выгрузка товаров запущена
+        </div>
+    @endif
+
+
     <div class="container">
+        <form method="post" action="{{ route('exportProducts') }}">
+            @csrf
+            <button type="submit" class="btn btn-link
+">Выгрузить товары</button>
+        </form>
+
+
+
+        <div class="container">
         <h3 class="text-center m-5">Товары</h3>
         <table class="table">
             <tbody>

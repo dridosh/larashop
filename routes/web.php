@@ -72,6 +72,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
 //    Route::get('/products', [AdminController::class, 'adminProducts'])->name('adminProducts');
     Route::post('/exportCategories', [AdminController::class, 'exportCategories'])->name('exportCategories');
+    Route::post('/exportProducts', [AdminController::class, 'exportProducts'])->name('exportProducts');
+
     Route::get('/users', [AdminController::class, 'adminUsers'])->name('adminUsers');
     Route::get('/enterAsUser/{userId}', [AdminController::class, 'enterAsUser'])->name('enterAsUser');
 

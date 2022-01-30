@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ExportCategories;
+use App\Jobs\ExportProducts;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -40,4 +41,12 @@ class AdminController extends Controller
         session()->flash('startExportCategories');
         return back();
     }
+    public function exportProducts ()
+    {
+        $exportColumns = false;
+        ExportProducts::dispatch($exportColumns);
+        session()->flash('startExportProducts');
+        return back();
+    }
+
 }
