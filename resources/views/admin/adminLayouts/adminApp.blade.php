@@ -25,7 +25,7 @@
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-light bg-black bg-opacity-10 shadow-none">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('admin') }}">
                         Панель администратора {{ config('app.name', 'Laravel') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

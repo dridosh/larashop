@@ -24,7 +24,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -35,7 +35,7 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -46,7 +46,8 @@ class AdminCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category=Category::find($id);
+        return view('admin.adminCategoryShow', compact('category'));
     }
 
     /**
@@ -57,7 +58,7 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd(__METHOD__);
     }
 
     /**
@@ -69,6 +70,7 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd(__METHOD__);
         //
     }
 
@@ -80,6 +82,6 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd(__METHOD__);
     }
 }

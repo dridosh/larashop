@@ -14,10 +14,10 @@
                         #
                     </th>
                     <th>
-                        Код
+                        Название
                     </th>
                     <th>
-                        Название
+                        Описание
                     </th>
                     <th>
                         Действия
@@ -26,13 +26,13 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
-                        <td>{{ $category->code }}</td>
                         <td>{{ $category->name }}</td>
+                        <td>{{ $category->description}}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <form action="" method="POST">
-                                    <a class="btn btn-success" type="button" href="">Открыть</a>
-                                    <a class="btn btn-warning" type="button" href="">Редактировать</a>
+                                <form action="{{route('adminCategories.destroy', $category)}}" method="POST">
+                                    <a class="btn btn-success" type="button" href="{{route('adminCategories.show', $category)}}">Открыть</a>
+                                    <a class="btn btn-warning" type="button" href="{{route('adminCategories.edit', $category)}}">Редактировать</a>
                                     @csrf
                                    @method('DELETE')
                                     <input class="btn btn-danger" type="submit" value="Удалить"></form>
@@ -44,7 +44,7 @@
         </table>
 
         <a class="btn btn-success" type="button"
-           href="">Добавить категорию</a>
+           href="{{route ('adminCategories.create')}}">Добавить категорию</a>
     </div>
 
 @endsection
