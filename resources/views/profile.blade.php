@@ -46,7 +46,7 @@
                     Имя
                 </label>
                 <input
-                class="form-control @if ($errors->has('name')) text-danger @endif" 
+                class="form-control @if ($errors->has('name')) text-danger @endif"
                 name="name"
                 value="{{$user->name}}">
             </div>
@@ -56,7 +56,7 @@
                 </label>
                 <input
                 autocomplete="new-password"
-                class="form-control" 
+                class="form-control"
                 name="current_password"
                 type="password"
                 >
@@ -66,7 +66,7 @@
                     Новый пароль
                 </label>
                 <input
-                class="form-control" 
+                class="form-control"
                 name="password"
                 type="password"
                 >
@@ -76,7 +76,7 @@
                     Повторите пароль
                 </label>
                 <input
-                class="form-control" 
+                class="form-control"
                 name="password_confirmation"
                 type="password"
                 >
@@ -100,15 +100,15 @@
                 @foreach ($user->addresses as $address)
                     <span>
                         @if ($address->main)
-                            <label for="{{$address->id}}">
-                                {{$address->address}}
-                            </label>
                             <input checked id="{{$address->id}}" type="radio" name="main_address" value="{{$address->id}}">
-                        @else
                             <label for="{{$address->id}}">
                                 {{$address->address}}
                             </label>
+                       @else
                             <input  id="{{$address->id}}" type="radio" name="main_address" value="{{$address->id}}">
+                            <label for="{{$address->id}}">
+                                {{$address->address}}
+                            </label>
                         @endif
                     </span>
                     <br>

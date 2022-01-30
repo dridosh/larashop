@@ -43,6 +43,7 @@ Route::prefix('basket')->group(function () {
     Route::prefix('product')->group(function () {
         Route::post('/add', [BasketController::class, 'add'])->name('addProduct');
         Route::post('/remove', [BasketController::class, 'remove'])->name('removeProduct');
+        Route::get('/orderCopyPaste/{order}', [BasketController::class, 'orderCopyPaste'])->name('orderCopyPaste');
     });
 });
 

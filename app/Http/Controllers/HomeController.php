@@ -96,8 +96,8 @@ class HomeController extends Controller
 
 
         if ($input['new_address']) {
-
-            if ($input['main_new_address']) {
+           // dd($input);
+            if (isset($input['main_new_address'])) {
                 Address::where('user_id', $user->id)->update([
                     'main' => 0
                 ]);

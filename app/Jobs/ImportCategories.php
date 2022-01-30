@@ -48,7 +48,7 @@ class ImportCategories implements ShouldQueue
                 'updated_at'
             ];
             fputcsv($file, $columns, ';');
-           
+
         }
 
         foreach ($categories as $category) {

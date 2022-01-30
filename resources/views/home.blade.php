@@ -14,6 +14,9 @@
         Нет заголовка
     @endif
 
+
+
+
     <home-component source="blade_template" :categories="{{$categories}}" ></home-component>
 
 </div>
