@@ -81,7 +81,7 @@ class HomeController extends Controller
         if ($file) {
             $ext = $file->getClientOriginalExtension();
             $fileName = time() . rand(1000, 9999) . '.' . $ext;
-            $file->storeAs('public/users', $fileName);
+            $file->storeAs('/public/img/users/', $fileName);
             $user->picture = $fileName;
         }
 

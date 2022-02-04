@@ -8,6 +8,8 @@
 @section('content')
     <div class="container">
 
+        <profile-component></profile-component>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -30,7 +32,11 @@
             </div>
         @endif
 
+
         <form method="POST" action="{{ route('profileUpdate') }}" enctype="multipart/form-data">
+
+
+
             @csrf
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">
@@ -46,19 +52,19 @@
                     Имя
                 </label>
                 <input
-                class="form-control @if ($errors->has('name')) text-danger @endif"
-                name="name"
-                value="{{$user->name}}">
+                    class="form-control @if ($errors->has('name')) text-danger @endif"
+                    name="name"
+                    value="{{$user->name}}">
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">
                     Текущий пароль
                 </label>
                 <input
-                autocomplete="new-password"
-                class="form-control"
-                name="current_password"
-                type="password"
+                    autocomplete="new-password"
+                    class="form-control"
+                    name="current_password"
+                    type="password"
                 >
             </div>
             <div class="mb-3">
@@ -66,9 +72,9 @@
                     Новый пароль
                 </label>
                 <input
-                class="form-control"
-                name="password"
-                type="password"
+                    class="form-control"
+                    name="password"
+                    type="password"
                 >
             </div>
             <div class="mb-3">
@@ -76,9 +82,9 @@
                     Повторите пароль
                 </label>
                 <input
-                class="form-control"
-                name="password_confirmation"
-                type="password"
+                    class="form-control"
+                    name="password_confirmation"
+                    type="password"
                 >
             </div>
             <div class="mb-3">
@@ -100,12 +106,13 @@
                 @foreach ($user->addresses as $address)
                     <span>
                         @if ($address->main)
-                            <input checked id="{{$address->id}}" type="radio" name="main_address" value="{{$address->id}}">
+                            <input checked id="{{$address->id}}" type="radio" name="main_address"
+                                   value="{{$address->id}}">
                             <label for="{{$address->id}}">
                                 {{$address->address}}
                             </label>
-                       @else
-                            <input  id="{{$address->id}}" type="radio" name="main_address" value="{{$address->id}}">
+                        @else
+                            <input id="{{$address->id}}" type="radio" name="main_address" value="{{$address->id}}">
                             <label for="{{$address->id}}">
                                 {{$address->address}}
                             </label>

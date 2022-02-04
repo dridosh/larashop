@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категория {{ $category->name }}</h1>
+        <h1>Категория: <strong>{{ $category->name }}</strong> </h1>
         <table class="table">
             <tbody>
                 <tr>

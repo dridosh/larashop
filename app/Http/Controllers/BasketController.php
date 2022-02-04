@@ -183,16 +183,22 @@
         public function orderCopyPaste ($id) {
             $order = Order::find($id);
 
-            $orderCopy = Order::create([
-                'user_id'    => $order->user_id,
-                'address_id' => $order->address_id,
-            ]);
-            foreach ($order->products as $product) {
-                $orderCopy->products()->attach($product, [
-                    'quantity' => $product->pivot->quantity,
-                    'price'    => $product->pivot->price,
-                ]);
+             foreach ($order->products as $product) {
+                $productsForBasket[$product->id]=$product->pivot->quantity;
+                session()->put('products', $productsForBasket);
+                session()->save();
+
+//                $orderCopy = Order::create([
+//                    'user_id'    => $order->user_id,
+//                    'address_id' => $order->address_id,
+//                ]);
+//                foreach ($order->products as $product) {
+
+//                $orderCopy->products()->attach($product, [
+//                    'quantity' => $product->pivot->quantity,
+//                    'price'    => $product->pivot->price,
+//                ]);
             }
-            return redirect()->back();
+            return redirect()->route('basket');
         }
     }
